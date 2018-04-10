@@ -16,7 +16,7 @@ provider "vault" {
     ca_cert_file = "${var.vault_ca_cert_file}"
 }
 
-resource vault_generic_secret "ca_sign" {
+resource vault_generic_secret "cert_sign" {
     path = "${var.vault_mount}/root/sign-intermediate"
     disable_read = true
     data_json = <<EOT
@@ -25,4 +25,8 @@ resource vault_generic_secret "ca_sign" {
     "format": "pem_bundle"  
 }
 EOT
+}
+
+output "cert" {
+    value = "${vault_generic_secret.cert_sign.data["certificate"]}"
 }
