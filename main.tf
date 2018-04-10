@@ -19,8 +19,10 @@ provider "vault" {
 resource vault_generic_secret "ca_sign" {
     path = "${var.vault_mount}/root/sign-intermediate"
     disable_read = true
-    data_json = ''{
-        "csr": ''${jsonencode(var.csr)},
-        "format": "pem_bundle"  
-    }''
+    data_json = <<EOT
+{
+    "csr": ''${jsonencode(var.csr)},
+    "format": "pem_bundle"  
+}
+EOT
 }
