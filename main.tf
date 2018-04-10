@@ -21,7 +21,7 @@ resource vault_generic_secret "cert_sign" {
     disable_read = true
     data_json = <<EOT
 {
-    "csr": ''${jsonencode(var.csr)},
+    "csr": ${jsonencode(var.csr)},
     "format": "pem_bundle"  
 }
 EOT
